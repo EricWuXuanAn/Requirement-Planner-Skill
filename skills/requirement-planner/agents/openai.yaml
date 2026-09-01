@@ -1,0 +1,7 @@
+interface:
+  display_name: "Requirement Planner"
+  short_description: "Plan implementation from Jira requirements"
+  brand_color: "#2563EB"
+  default_prompt: "Use $requirement-planner to plan implementation from this requirement URL."
+policy:
+  allow_implicit_invocation: true

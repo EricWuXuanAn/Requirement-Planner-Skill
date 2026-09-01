@@ -1,0 +1,15 @@
+.codegraph
+.agents
+.requirement-planner
+.env
+.venv
+.venv-old
+__pycache__
+.pytest_cache
+.mypy_cache
+.ruff_cache
+*.pyc
+out.json
+out/
+.idea
+*.iml

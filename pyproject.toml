@@ -1,0 +1,50 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "requirement-planner"
+version = "0.1.0"
+description = "Codex skill and CLI for turning requirement URLs into implementation-ready specifications."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Requirement Planner Maintainers" }]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0,<9.0",
+  "ruff>=0.6,<1.0",
+  "mypy>=1.10,<2.0",
+]
+
+[project.scripts]
+requirement-planner = "sdd_skill.cli:main"
+sdd-skill = "sdd_skill.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/sdd_skill", "src/sdd_skill_skill"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"src/sdd_skill_skill/skill" = "sdd_skill_skill/skill"
+"src/sdd_skill_skill/adapters" = "sdd_skill_skill/adapters"
+# Keep the standalone scripts available to the installer.  The packaged skill
+# scripts are CLI wrappers, while installed skills must also work without the
+# sdd_skill package being importable from the target project.
+"skills/requirement-planner/scripts" = "sdd_skill_skill/standalone_scripts"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+packages = ["sdd_skill"]

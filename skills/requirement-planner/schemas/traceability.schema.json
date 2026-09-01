@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TraceabilityMatrix",
+  "type": "object",
+  "required": ["rows"],
+  "properties": {
+    "rows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source_or_decision", "requirement", "acceptance", "task", "test"],
+        "properties": {
+          "source_or_decision": { "type": "string" },
+          "requirement": { "type": "string" },
+          "evidence": { "type": "string" },
+          "acceptance": { "type": "string" },
+          "task": { "type": "string" },
+          "test": { "type": "string" }
+        }
+      }
+    }
+  }
+}
