@@ -7,8 +7,7 @@ Claude, and generic repository instructions.
 Full support requires:
 
 - file read access;
-- for URL requirements, an available user-authorized browser, issue tracker
-  connector, or other source-reading capability;
+- for URL requirements, an available user-authorized browser tool;
 - ability to run the inspection and validation scripts or accept their output
   manually;
 - ability to ask the user follow-up questions;

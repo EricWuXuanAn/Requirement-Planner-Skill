@@ -12,5 +12,6 @@ Prompt:
 Use the requirement-planner skill for this requirement URL: <URL>
 ```
 
-The agent selects any available user-authorized source-reading capability for
-the URL. No browser vendor or credential configuration is assumed.
+The agent uses only an available user-authorized browser for URL requirements.
+Reuse an existing matching tab first; otherwise open the supplied URL. Never use
+legacy Jira API scripts or check local credentials. No browser vendor is assumed.

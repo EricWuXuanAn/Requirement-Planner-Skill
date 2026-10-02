@@ -1,10 +1,12 @@
 # Requirement Source Access
 
-Requirement Planner does not implement source providers or Jira REST API
-access. URL requirements are read by the executing agent through an available,
-user-authorized browser, issue tracker connector, or other source capability.
+Requirement URLs are acquired only through the executing agent's available,
+user-authorized browser tools. First inspect existing tabs and reuse a matching
+URL (for Jira, matching origin and issue key); otherwise open the supplied URL.
+Verify the page identity before extraction. Follow the bounded recovery and
+login handling in `skills/requirement-planner/SKILL.md`.
 
-The agent must pause for user authentication when necessary, reload and verify
-the original URL afterward, and never request or handle passwords, API tokens,
-cookies, or CA bundle paths. If no source capability is available, use pasted or
-exported requirement content instead.
+Do not use Jira REST APIs, legacy fetch scripts, HTTP clients, or issue-tracker
+connectors for source acquisition. Do not inspect `.env`, local Jira credentials,
+cookies, or CA settings. Local inspection and validation scripts remain supported.
+If browser access is unavailable, ask for pasted or exported requirement content.

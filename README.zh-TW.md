@@ -18,8 +18,9 @@ docs/requirements/<REQUIREMENT_KEY>/
 
 ## 需求來源存取
 
-遇到 Jira URL 時，由執行中的 Agent 自行判斷並選擇當下可用、且經使用者授權的
-瀏覽器、issue tracker connector 或其他來源讀取能力。本專案不提供瀏覽器實作，
+遇到 Jira URL 時，Agent 一律使用當下可用、且經使用者授權的瀏覽器。
+先檢查既有分頁，有符合網址的分頁就優先使用；沒有才開啟使用者提供的連結。
+不執行舊 Jira API 腳本，也不檢查 `.env` 或本地帳密。本專案不提供瀏覽器實作，
 也不再要求 Jira 帳號、密碼、API token、cookie 或公司 CA 路徑。
 
 若頁面要求登入，請在 Agent 提供的介面完成登入，再由 Agent 重新載入並確認原始
@@ -95,7 +96,7 @@ CLI 版本使用對應的 scope 選項。
 
 ```text
 When planning a requirement, read .agents/skills/requirement-planner/SKILL.md and
-follow it exactly. Use the source-reading capability available to you for URL
+follow it exactly. Use only the available user-authorized browser tools for URL
 requirements, and use the Python scripts in that skill only for inspection,
 validation, and clear docs operations.
 ```

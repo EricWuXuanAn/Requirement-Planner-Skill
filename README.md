@@ -28,8 +28,9 @@ The repository includes two forms:
 
 ## Requirement Source Access
 
-For a Jira URL, the executing agent chooses an available, user-authorized
-browser, issue tracker connector, or other source-reading capability. This
+For a Jira URL, the agent uses only an available, user-authorized browser.
+It first reuses an existing matching tab; otherwise it opens the supplied URL.
+It never uses legacy Jira API scripts or checks local credentials. This
 project does not provide a browser implementation and does not require Jira
 credentials, cookies, API tokens, or company CA paths.
 
@@ -110,7 +111,7 @@ instructions:
 
 ```text
 When planning a requirement, read .agents/skills/requirement-planner/SKILL.md and
-follow it exactly. Use the source-reading capability available to you for URL
+follow it exactly. Use only the available user-authorized browser tools for URL
 requirements, and use the Python scripts in that skill only for inspection,
 validation, and clear docs operations.
 ```
