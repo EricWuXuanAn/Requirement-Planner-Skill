@@ -45,6 +45,14 @@ Please plan implementation for this Jira requirement:
 https://jira.example.com/browse/APP-1234
 ```
 
+## 規劃行為
+
+Agent 會先檢查需求來源與目前專案，再釐清會影響需求理解、實作範圍或驗收的
+重要不確定事項。問題數量沒有固定上限；Agent 會避免重複詢問已有證據可回答的
+內容，並在答案帶出新的重要不確定事項時繼續追問。若來源或專案證據不存在，會
+明確標示未知，不會為了符合問題格式而編造證據或選項。阻塞問題解決並經使用者
+確認後，才會將規格標記為可開始實作。
+
 ### Cursor
 
 Cursor 會從 `~/.cursor/skills/` 與 `~/.agents/skills/` 掃描使用者 skill。

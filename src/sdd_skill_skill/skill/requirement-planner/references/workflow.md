@@ -11,7 +11,9 @@
    source roots, tests, schemas, migrations, resources, and relevant code.
 5. Build an evidence index with stable IDs.
 6. Identify facts, conflicts, gaps, risks, and engineering inferences.
-7. Interview the user for blocking and important implementation choices only.
+7. Interview the user about material unresolved requirements and implementation
+   choices. Classify each question by severity and continue until no material
+   uncertainty remains; there is no fixed question limit.
 8. Summarize decisions and wait for confirmation.
 9. Generate implementation and test specifications.
 10. Run the installed standalone `scripts/validate_spec.py` against the

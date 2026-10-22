@@ -166,7 +166,8 @@ The installed skill requires the agent to:
 - inspect the actual repository before proposing implementation;
 - separate source facts, project facts, user decisions, engineering inferences,
   unknowns, and risks;
-- ask at most three blocking or important questions per batch;
+- ask the questions needed to resolve material uncertainties, with no fixed
+  question limit, while avoiding questions already answered by evidence;
 - wait for user confirmation before marking a spec Ready for Implementation;
 - stop after planning unless the user explicitly asks for implementation.
 

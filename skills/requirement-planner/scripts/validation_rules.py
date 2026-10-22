@@ -4,10 +4,18 @@
 from __future__ import annotations
 
 import re
+from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
 
 ID_RE = re.compile(r"\b(SRC|CODE|DEC|FR|NFR|AC|IMP|TR|RISK|Q)-\d{3}\b")
+TABLE_ID_DEFINITION_RE = re.compile(
+    r"^\s*\|\s*((?:SRC|CODE|DEC|FR|NFR|AC|IMP|TR|RISK|Q)-\d{3})\s*\|"
+)
+QUESTION_DEFINITION_RE = re.compile(
+    r"^\s*[-*]\s+(Q-\d{3})(?:\s+(?:Blocking|Important|Non-blocking)\b|[:：—-])",
+    re.IGNORECASE,
+)
 READY_RE = re.compile(r"(?i)Ready for Implementation")
 BLOCKING_RE = re.compile(r"\bQ-\d{3}\b.*\bBlocking\b|\bBlocking\b.*\bQ-\d{3}\b", re.I)
 
@@ -34,8 +42,10 @@ def validate_spec(path: Path) -> ValidationResult:
     errors: list[str] = []
     warnings: list[str] = []
     ids = ID_RE.findall(text)
-    concrete_ids = [match.group(0) for match in re.finditer(ID_RE, text)]
-    duplicates = sorted({item for item in concrete_ids if concrete_ids.count(item) > 1})
+    declared_ids = find_declared_ids(text)
+    duplicates = sorted(
+        item for item, count in Counter(declared_ids).items() if count > 1
+    )
     if duplicates:
         errors.append(f"Duplicate IDs found: {', '.join(duplicates)}")
 
@@ -48,6 +58,16 @@ def validate_spec(path: Path) -> ValidationResult:
 
     check_confirmed_paths(text, path.parent, errors)
     return ValidationResult(ok=not errors, errors=errors, warnings=warnings)
+
+
+def find_declared_ids(text: str) -> list[str]:
+    """Find IDs where a spec defines them, excluding later traceability references."""
+    declared: list[str] = []
+    for line in text.splitlines():
+        match = TABLE_ID_DEFINITION_RE.match(line) or QUESTION_DEFINITION_RE.match(line)
+        if match:
+            declared.append(match.group(1))
+    return declared
 
 
 def check_confirmed_paths(text: str, spec_dir: Path, errors: list[str]) -> None:
